@@ -1,0 +1,37 @@
+HTTP/1.1 200 OK 
+Connection: close
+Accept-Ranges: bytes
+Content-Language: en-us 
+Expires: Thu, 01 Aug 2017 00:01:00 GMT 
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>192.168.10.4:9999</title>
+    <link rel="shortcut icon" href="http://hackers.pk/images/favicon.ico" type="images/x-icon" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- Bootstrap starts -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <!-- Bootstrap ends -->
+</head>
+
+<body>  
+
+    <div class="container content">                           
+        <div class="row">
+	     <video controls="" preload="auto" src="http://192.168.10.4:9999/content/GoogleScienceFairWinners_2001X-480p.mp4" width="100%"></video>
+        </div>                    
+    </div>
+             
+</body>
+
+</html>
+
+

@@ -1,0 +1,20 @@
+HTTP/1.1 200 OK 
+Content-Length: 0
+Connection: Close 
+Content-Language: en-us 
+Expires: Thu, 01 Dec 1994 16:00:00 GMT 
+
+<html> 
+<head> <title> Hey their, </title> </head>
+<body>
+
+<h1> Since entity has expired already, the entity will not be cached by the user agent and next time when request is made for the same content, the user agent will send the request to the server(since it is not cached) </h1>
+
+</body>
+</html>
+
+
+
+
+
+
