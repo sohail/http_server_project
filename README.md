@@ -10,7 +10,7 @@ ___Example Application___
 ```
 import httpheaders
 
-content = "POST /api/messages HTTP/1.1\r\nAuthorization: Bearer\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 88\r\nHost: localhost:3978\r\n\r\n&lt;html&gt;\r\n&lt;head&gt;\r\n&lt;title&gt;Hi!&lt;/title&gt;\r\n&lt;/head&gt;\r\n&lt;body&gt;\r\n&lt;p&gt;Hi friend.&lt;/p&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;"
+content = "POST /api/messages HTTP/1.1\r\nAuthorization: Bearer\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 88\r\nHost: localhost:3978\r\n\r\n<html>\r\n<head>\r\n<title>Hi!</title>\r\n</head>\r\n<body>\r\n<p>Hi friend.</p>\r\n</body>\r\n</html>"
 
 httpheaders\_obj = httpheaders.httpheaders(content, len(content))
 
