@@ -1,4 +1,4 @@
-# regedit/Makefile
+# Makefile
 # Written by, Sohail Qayum Malik[sqm@hackers.pk]
 
 all		: http_headers argsv
