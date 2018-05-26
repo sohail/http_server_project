@@ -12,11 +12,11 @@ import httpheaders
 
 content = "POST /api/messages HTTP/1.1\r\nAuthorization: Bearer\r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 88\r\nHost: localhost:3978\r\n\r\n<html>\r\n<head>\r\n<title>Hi!</title>\r\n</head>\r\n<body>\r\n<p>Hi friend.</p>\r\n</body>\r\n</html>"
 
-httpheaders\_obj = httpheaders.httpheaders(content, len(content))
+httpheaders_obj = httpheaders.httpheaders(content, len(content))
 
-for l in httpheaders\_obj:
+for l in httpheaders_obj:
     print l[0] + ": " + l[1]
 
-print str(httpheaders\_obj)
+print str(httpheaders_obj)
 ```
 
