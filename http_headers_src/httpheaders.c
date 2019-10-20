@@ -4,7 +4,7 @@
 
 /*
  * httpheaders.c
- * Written by, sohail.github.io
+ * Written by, Sohail Qayum Malik
  */
 
 /*

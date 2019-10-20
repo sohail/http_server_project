@@ -1,5 +1,5 @@
 /* src/keys.h 
-   Written by, sohail.github.io */
+   Written by, Sohail Qayum Malik */
 
 #include <Python.h>
 #include <structmember.h>

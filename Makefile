@@ -1,5 +1,5 @@
 # Makefile
-# Written by, Sohail Qayum Malik[sqm@hackers.pk]
+# Written by, Sohail Qayum Malik
 
 all		: http_headers argsv
 

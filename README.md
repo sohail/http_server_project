@@ -1,5 +1,5 @@
 # http\_server\_project
-A frame work to build an HTTP server. Written by, sqm@hackers.pk
+A frame work to build an HTTP server. Written by, Sohail Qayum Malik
 
 The http\_headers\_src folder has C source code of "httpheaders" module. The module is used to parse HTTP request/reply. An example application **http-serv.py** is part of this repository. Please use this application to know the smarts of the "httpheaders" module. 
 
