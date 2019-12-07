@@ -1,7 +1,7 @@
 # http\_server\_project
 A frame work to build an HTTP server. Written by, Sohail Qayum Malik
 
-The http\_headers\_src folder has C source code of "httpheaders" module. The module is used to parse HTTP request/reply. An example application **http-serv.py** is part of this repository. Please use this application to know the smarts of the "httpheaders" module. **Folder http_server_project-Python3.9 has the working implementation of this program much recent version of Python. I tested it with 3.8 and 3.9.0-alpha1** . 
+The http\_headers\_src folder has C source code of "httpheaders" module. The module is used to parse HTTP request/reply. An example application **http-serv.py** is part of this repository. Please use this application to know the smarts of the "httpheaders" module. **Folder http_server_project-Python3.9 has the working implementation of this program for much recent version of Python. I tested it with 3.8 and 3.9.0-alpha1** . 
 
 The _example application_ uses another CPython module **argsv-cpython** to parse command line arguments you can colne it from here... __https://github.com/sohail/argsv-CPython.git__ 
 
