@@ -166,24 +166,31 @@ PyObject* httpheaders_PyTypeObject_reprfunc(httpheaders_object *self)
     if (self->dict != NULL)
     {
         while (PyDict_Next(self->dict, &pos, &key, &value))
-	{
-	    PyObject* type_str = PyBytes_FromString(((keys_object*)key)->type_str);
-	    if (type_str != NULL)
 	    {
-	        if (strcmp(PyBytes_AsString(type_str), CONTENT_LENGTH) == 0)
-		{
-		    Py_ssize_t content_length = atoi(PyBytes_AsString(value));
+	        PyObject* type_str = PyBytes_FromString(((keys_object*)key)->type_str);
 
-		    char* ptr = malloc(content_length + 1);
+	        if (type_str != NULL)
+	        {
+	            if (strcmp(PyBytes_AsString(type_str), CONTENT_LENGTH) == 0)
+		        {
+		            Py_ssize_t content_length = atoi(PyBytes_AsString(value));
 
-		    strncpy(ptr, self->message_body, content_length);
+		            char* ptr = malloc(content_length + 1);
 
-		    *(ptr + content_length) = '\0';
+		            strncpy(ptr, self->message_body, content_length);
 
-                    return Py_BuildValue("s", ptr);                     
-		}
-	    }
-	}
+		            *(ptr + content_length) = '\0';
+
+                    //printf ("----> %s", ptr);
+
+                    //PyObject * body = Py_BuildValue("s", ptr);
+
+                    return Py_BuildValue("s", ptr);
+
+                    //return body;                     
+		        }
+	        }
+	    }   
     }
 
     Py_XINCREF(Py_None);
@@ -557,7 +564,10 @@ static PyTypeObject httpheaders = {
 						       PyMappingMethods* */
    /*More standard operations(here for binary compatibility)(Include/object.h*/
    0,						/* tp_hash */
-   (ternaryfunc)httpheaders_PyTypeObject_ternaryfunc, /* tp_call */
+
+   // https://docs.python.org/3/c-api/typeobj.html#c.PyTypeObject.tp_str
+   (ternaryfunc)httpheaders_PyTypeObject_ternaryfunc, /* tp_call */ // Called by the str() which is eventually called by the print
+   
    (reprfunc)httpheaders_PyTypeObject_reprfunc,	      /* tp_str */
    0,						/* tp_getattro */ /* o is obj */
    0,						/* tp_setattro */ /* o is obj */
