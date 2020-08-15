@@ -4,7 +4,7 @@
 
 /*
  * httpheaders.h
- * Written by, Sohail Qayum Malik
+ * Written by, Sohail Qayum Malik [soni@sharingeconomy.pk]
  */
 
 #include <Python.h>

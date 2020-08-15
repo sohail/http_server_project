@@ -4,7 +4,7 @@
 
 /*
  * httpheaders.c
- * Written by, Sohail Qayum Malik
+ * Written by, Sohail Qayum Malik [soni@sharingeconomy.pk]
  */
 
 /*
@@ -89,7 +89,7 @@ static PyObject* httpheaders_PyTypeObject_iternextfunc(httpheaders_object *self)
         if (((keys_object*)key)->index == self->index)
 	{
             //printf("---> %s\n", ((keys_object*)key)->type_str);
-	    PyObject *type_str = PyBytes_FromString(((keys_object*)key)->type_str);
+	    PyObject *type_str = PyUnicode_FromString(((keys_object*)key)->type_str);
 	    if (type_str == NULL)
 	    {
 	        return (PyObject*)NULL;
@@ -163,6 +163,67 @@ PyObject* httpheaders_PyTypeObject_reprfunc(httpheaders_object *self)
     Py_ssize_t pos = 0;
     PyObject *key = NULL, *value = NULL;
 
+    //printf("Hello World");
+
+    if (self->dict != NULL)
+    {
+        while (PyDict_Next(self->dict, &pos, &key, &value))
+	    {
+	        //PyObject* type_str = PyUnicode_FromString(((keys_object*)key)->type_str);
+            //PyObject* type_str = ((keys_object*)key)->type_str;
+
+            if (((keys_object*)key)->type_str != NULL)
+            {
+                if (strcmp(((keys_object*)key)->type_str, CONTENT_LENGTH) == 0)
+                {
+                    //printf("--> %d\n", atoi(PyBytes_AsString(PyUnicode_AsASCIIString(value))));
+                    //printf ("---> \n");
+                    Py_ssize_t content_length = atoi(PyBytes_AsString(PyUnicode_AsASCIIString(value)));
+                    //printf("--> %d\n", content_length);
+
+                    char* ptr = malloc(content_length + 1);
+
+		            strncpy(ptr, self->message_body, content_length);
+
+		            *(ptr + content_length) = '\0';
+
+                    return PyUnicode_FromFormat("%s", ptr);
+                }
+            }
+	        /* if (type_str != NULL)
+	        {
+	            if (strcmp(PyBytes_AsString(type_str), CONTENT_LENGTH) == 0)
+		        {
+		            Py_ssize_t content_length = atoi(PyBytes_AsString(value));
+
+		            char* ptr = malloc(content_length + 1);
+
+		            strncpy(ptr, self->message_body, content_length);
+
+		            *(ptr + content_length) = '\0';
+
+                    //printf ("----> %s", ptr);
+
+                    //PyObject * body = Py_BuildValue("s", ptr);
+
+                    //return Py_BuildValue("s", ptr);
+                    return PyUnicode_FromFormat("%s", ptr);
+
+                    //return body;                     
+		        }
+	        } */
+	    }   
+    }
+
+    Py_XINCREF(Py_None);
+    return (PyObject*)Py_None;
+}
+
+PyObject* httpheaders_PyTypeObject_reprfunc_tp_str(httpheaders_object *self)
+{
+    Py_ssize_t pos = 0;
+    PyObject *key = NULL, *value = NULL;
+
     if (self->dict != NULL)
     {
         while (PyDict_Next(self->dict, &pos, &key, &value))
@@ -185,7 +246,11 @@ PyObject* httpheaders_PyTypeObject_reprfunc(httpheaders_object *self)
 
                     //PyObject * body = Py_BuildValue("s", ptr);
 
-                    return Py_BuildValue("s", ptr);
+                    //return Py_BuildValue("s", ptr);
+                    //return PyUnicode_FromFormat("%s", ptr);
+                    //return PyUnicode_FromString(ptr);
+                    //printf("Helo World");
+                    return PyUnicode_FromStringAndSize(ptr, content_length);
 
                     //return body;                     
 		        }
@@ -264,7 +329,7 @@ static PyObject *httpheaders_PyTypeObject_descrgetfunc(httpheaders_object *self,
 		      {
 		          strcpy(key->type_str, begin_ptr);
 			      *(key->type_str + len) = '\0';
-			      value = PyBytes_FromStringAndSize(colon_ptr + 2, (end_ptr - 1) - (colon_ptr + 2));
+			      value = PyUnicode_FromStringAndSize(colon_ptr + 2, (end_ptr - 1) - (colon_ptr + 2));
 			      if (value != NULL)
 			      {
 			          Py_XINCREF(key);
@@ -329,7 +394,7 @@ static PyObject *httpheaders_PyTypeObject_descrgetfunc(httpheaders_object *self,
 		      {
 		          strcpy(key->type_str, "METHOD");
 			  *(key->type_str + len) = '\0';
-			  value = PyBytes_FromStringAndSize(begin_ptr, colon_ptr - begin_ptr);
+			  value = PyUnicode_FromStringAndSize(begin_ptr, colon_ptr - begin_ptr);
 			  if (value != NULL)
 			  {
 			      Py_XINCREF(key);
@@ -369,7 +434,7 @@ static PyObject *httpheaders_PyTypeObject_descrgetfunc(httpheaders_object *self,
 			  {
 			      strcpy(key->type_str, "RESOURCE");
 			      *(key->type_str + len) = '\0';
-			      value = PyBytes_FromStringAndSize(colon_ptr, foo - colon_ptr);
+			      value = PyUnicode_FromStringAndSize(colon_ptr, foo - colon_ptr);
 			      if (value != NULL)
 			      {
 			          Py_XINCREF(key);
@@ -411,7 +476,7 @@ static PyObject *httpheaders_PyTypeObject_descrgetfunc(httpheaders_object *self,
 			     {
 			         strcpy(key->type_str, "VERSION");
 				 *(key->type_str + len) = '\0';
-				 value = PyBytes_FromStringAndSize(colon_ptr, foo - colon_ptr);
+				 value = PyUnicode_FromStringAndSize(colon_ptr, foo - colon_ptr);
 				 if (value != NULL)
 				 {
 				     Py_XINCREF(key);
@@ -486,6 +551,8 @@ static int httpheaders_PyTypeObject_initproc(httpheaders_object *self, PyObject 
    else 
    {
      
+     //printf("%s\n", self->header);
+
       /*(void *)self->ob_type->tp_descr_get((PyObject *)self, (PyObject *)NULL, (PyObject *)NULL);*/
       Py_TYPE(self)->tp_descr_get((PyObject *)self, (PyObject *)NULL, (PyObject *)NULL);
    }
@@ -554,7 +621,7 @@ static PyTypeObject httpheaders = {
    0,				        	/* tp_getattr */
    0,				         	/* tp_setattr */
    0,						/* tp_compare */
-   0,						/* tp_repr */
+   (reprfunc)httpheaders_PyTypeObject_reprfunc,						/* tp_repr */
    /* Methods suits for standard classes(Include/object.h) */ 
    0,						/* tp_as_number, \
 						       PyNumberMethods* */
@@ -568,7 +635,7 @@ static PyTypeObject httpheaders = {
    // https://docs.python.org/3/c-api/typeobj.html#c.PyTypeObject.tp_str
    (ternaryfunc)httpheaders_PyTypeObject_ternaryfunc, /* tp_call */ // Called by the str() which is eventually called by the print
    
-   (reprfunc)httpheaders_PyTypeObject_reprfunc,	      /* tp_str */
+   (reprfunc)0/*httpheaders_PyTypeObject_reprfunc_tp_str*/, /*httpheaders_PyTypeObject_reprfunc,*/	      /* tp_str */
    0,						/* tp_getattro */ /* o is obj */
    0,						/* tp_setattro */ /* o is obj */
    /* Functions to access object as input/output buffer(Include/object.h) */

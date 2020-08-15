@@ -1,5 +1,11 @@
-/* src/keys.h 
-   Written by, Sohail Qayum Malik */
+/* 
+ * Allah, THE ONE and THE ONLY ONE. THE ALL MIGHTY
+ */
+
+/*
+ * src/keys.h
+ * Written by, Sohail Qayum Malik [soni@sharingeconomy.pk]
+ */
 
 #include <Python.h>
 #include <windows.h>

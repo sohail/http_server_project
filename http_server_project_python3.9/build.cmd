@@ -1,1 +1,1 @@
-msbuild httpheaders.xml /p:PySourcePath=CPython\
+msbuild httpheaders.xml /p:PySourcePath=D:/regexpr-python/CPython/
