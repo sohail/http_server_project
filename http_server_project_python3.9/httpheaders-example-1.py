@@ -7,6 +7,9 @@ try:
 
     httpheaders_obj = httpheaders.httpheaders(content, len(content))
 
+    #TODO
+    #print (len(httpheaders_obj))
+    
     # Tries to print message body
     print (httpheaders_obj)
     print ("<!----------------------------------------------------------------/>")
@@ -21,15 +24,20 @@ try:
     print (httpheaders_obj("RESOURCE"))
     print (httpheaders_obj("VERSION"))
     
-    # I don't know what this is needed but here it is
+    # I don't know why this is needed but here it is
     if httpheaders_obj("VERSION") == "HTTP/1.1":
         print ("Found...")
     else:
         print ("Not found.")        
     print ("<!----------------------------------------------------------------/>")   
 
-    # To get to the request/reply payload/resource. Little hack, handler of str() still does'nt work
+    # To get to the request/reply payload/resource. Little hack...
     resource = content[len(content) - int(httpheaders_obj("Content-Length")):]
+    print (resource)
+    print ("<!----------------------------------------------------------------/>") 
+
+    # this is better
+    resource = str(httpheaders_obj)
     print (resource)
 
 except (ImportError, MemoryError, TypeError) as e:
